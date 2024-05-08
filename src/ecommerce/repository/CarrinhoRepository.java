@@ -1,13 +1,16 @@
 package ecommerce.repository;
 
+import ecommerce.model.Produtos;
+
 public interface CarrinhoRepository {
 	
-	public static void listarProdutoCarrinho() {};
-	public static void adicionarElementoCarrinho() {};
-	public static void excluirProdutoCarrinho() {};
-	public static void editarProdutosCarrinho() {};
+	public void listarProdutoCarrinho();
+	public void adicionarElementoCarrinho(Produtos produto, int qtd);
+	public void excluirProdutoCarrinho(int posicaoCarrinho);
+	public void excluirTodosOsProdutos();
+//	public void editarProdutosCarrinho();
 	
 	//Método de compra produto
-	public static void comprarProdutos() {};
+	public void comprarProdutos(float totalCompra, float saldo, int idCliente);
 
 }
