@@ -2,12 +2,12 @@ package ecommerce;
 
 
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ecommerce.controller.CarrinhoController;
 import ecommerce.controller.Estoque;
 import ecommerce.model.Cliente;
-import ecommerce.model.Loja;
 import ecommerce.model.Produtos;
 import util.Cores;
 
@@ -23,15 +23,15 @@ public class Menu {
 		System.out.println("                                                                        ");
 		System.out.println("                           AMAZONIA                                     ");
 		System.out.println("                                                                        ");
-		System.out.println("************************************************************************");
-		System.out.println("                                                                        ");
-		System.out.println("                         1- Vendedor                                    ");
-		System.out.println("                         2- Cliente                                     ");
 
 		int tipoUsuario;
 		
 		do {
-		System.out.println("Olá, favor se identifique: ");
+			System.out.println("************************************************************************");
+			System.out.println("                                                                        ");
+			System.out.println("                         1- Vendedor                                    ");
+			System.out.println("                         2- Cliente                                     ");
+			System.out.println("Olá, favor se identifique: ");
 		
 		tipoUsuario = leia.nextInt();
 		
@@ -48,7 +48,7 @@ public class Menu {
 		}else {
 			System.out.println("opção inválida");
 		}
-		}while(tipoUsuario > 1 && tipoUsuario < 2);
+		}while(tipoUsuario > 1 || tipoUsuario < 2);
 			
 		System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLUE_BACKGROUND + 
 				"************************************************************************");
@@ -82,11 +82,11 @@ public class Menu {
 		estoque.adicionarElemento(produto3);
 
 
-		int inputUsuario;
+		int inputUsuario = 0;
 		do {
 			System.out.println("************************************************************************");
 			System.out.println("                                                                        ");
-			System.out.println("                    1- Adcionar produto no carrinho                     ");
+			System.out.println("                    1- Adicionar produto no carrinho                     ");
 			System.out.println("                    2- Ver Carrinho                                     ");
 			System.out.println("                    3- Comprar                                          ");
 			System.out.println("                    4- Excluir um produto                               ");
@@ -94,19 +94,31 @@ public class Menu {
 			System.out.println("                                                                        ");
 			System.out.println("************************************************************************");
 			
-			inputUsuario = leia.nextInt();
+			try {
+        		inputUsuario = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite um numero");
+			}
+			
 			leia.nextLine();
 			
 		switch (inputUsuario) {
         case 1:
         	
-        	int produto;
+        	int produto = 0;
+        	int qtd = 0;
+        	
 			do {
         	estoque.listarProdutoEstoque();
         	
         	System.out.println("Qual produto deseja??\nou aperte -1 para voltar ao menu principal");
         	
-        	produto = leia.nextInt();
+        	try {
+        		produto = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite um numero");
+			}
+        	
         	
         	if(produto == -1) {
         		continue;
@@ -114,7 +126,12 @@ public class Menu {
         	
         	System.out.println("Quantos produtos deseja?? ");
         	
-        	int qtd = leia.nextInt();
+        	try {
+        		qtd = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite um numero");
+			}
+        	
         	
         	var produtoRetiradoDoEstoque = estoque.retirarElemento(produto, qtd);
         	
@@ -139,9 +156,15 @@ public class Menu {
         	carrinho.listarProdutoCarrinho();
         	
         	System.out.println("Qual poduto deseja excluir??");
-        	inputUsuario = leia.nextInt();
+        	int indexProdutoDaLista = 0;
         	
-        	carrinho.excluirProdutoCarrinho(inputUsuario);
+        	try {
+        		indexProdutoDaLista = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite um numero");
+			}
+        	
+        	carrinho.excluirProdutoCarrinho(indexProdutoDaLista);
           
             break;
         case 5:
