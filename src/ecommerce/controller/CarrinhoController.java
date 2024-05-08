@@ -66,11 +66,12 @@ public class CarrinhoController implements CarrinhoRepository{
 
 	@Override
 	public void comprarProdutos(float totalCompra, float saldo, int idCliente) {
-		System.out.println("Muito obrigado por comprar com a amazonia");
 		
 		if(saldo < totalCompra) {
 			System.out.println("Não foi possivel realizar a compra, saldo insuficiente!!");
 			return;
+		}else {
+			System.out.println("Muito obrigado por comprar com a amazonia");
 		}
 		
 		totalCompra = 0;
@@ -81,7 +82,7 @@ public class CarrinhoController implements CarrinhoRepository{
 		int total = 0;
 		
 		for(var produto : this.conteudoCarrinho) {
-			System.out.println(i + " - " + produto.getTipoProduto() + "Quantidade: " + produto.getQuantidade());		
+			System.out.println(i + " - " + produto.getTipoProduto() + " Quantidade: " + produto.getQuantidade());		
 			i++;
 		}
 	}

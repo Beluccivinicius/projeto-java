@@ -59,12 +59,12 @@ public class Menu {
 
 		}
 	
-	public static boolean loja() {
+	public static void loja() {
 		Estoque estoque = new Estoque();
 		
 		//inicializar Clientes
-		Cliente cliete1 = new Cliente(1, "Maria", 30, 400.0f);
-		Cliente cliete2 = new Cliente(2, "João", 20, 400.0f);
+		Cliente cliente1 = new Cliente(1, "Maria", 30, 400.0f);
+		Cliente cliente2 = new Cliente(2, "João", 20, 400.0f);
 		
 		//Produtos Para comprar
 		Produtos produto1 = new Produtos(1, 250.0f, "Bicicleta", 3);
@@ -148,9 +148,8 @@ public class Menu {
             carrinho.listarProdutoCarrinho();
             break;
         case 3:
-    		System.out.println("Muito obrigado por comprar com a amazonia");
-    		
-    		carrinho.comprarProdutos(carrinho.getTotalCompra(), cliete1.getSaldo(), cliete1.getId());
+        	//Cliente getSaldo sendo instanciado manualment linha 66/67
+    		carrinho.comprarProdutos(carrinho.getTotalCompra(), cliente1.getSaldo(), cliente1.getId());
             break;
         case 4:
         	carrinho.listarProdutoCarrinho();
@@ -170,13 +169,13 @@ public class Menu {
         case 5:
             System.out.println("Obrigado pela visita, seu carrinho será esvaziado!");
             carrinho.excluirTodosOsProdutos();
+            inputUsuario = -1;
             break;     
         default:
             System.out.println("Escolha inválida");
     }
-		}while(inputUsuario != 6);
-		
-		return true;
+		}while(inputUsuario > 0);
+	
 	}
 		
 		
