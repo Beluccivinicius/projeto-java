@@ -24,7 +24,7 @@ public class Menu {
 		System.out.println("                           AMAZONIA                                     ");
 		System.out.println("                                                                        ");
 
-		int tipoUsuario;
+		int tipoUsuario = 0;
 		
 		do {
 			System.out.println("************************************************************************");
@@ -33,7 +33,12 @@ public class Menu {
 			System.out.println("                         2- Cliente                                     ");
 			System.out.println("Olá, favor se identifique: ");
 		
-		tipoUsuario = leia.nextInt();
+			try {
+				tipoUsuario = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite um numero");
+			}
+
 		
 		if(tipoUsuario == 1) {
 			
@@ -49,13 +54,6 @@ public class Menu {
 			System.out.println("opção inválida");
 		}
 		}while(tipoUsuario > 1 || tipoUsuario < 2);
-			
-		System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLUE_BACKGROUND + 
-				"************************************************************************");
-		System.out.println("                                                                        ");
-		System.out.println("AMAZONIA tudo com os melhores preços                                    ");
-		System.out.println("                                                                        ");
-		System.out.println("************************************************************************");
 
 		}
 	
@@ -116,11 +114,13 @@ public class Menu {
         	try {
         		produto = leia.nextInt();
 			} catch (InputMismatchException e) {
-				System.out.println("Digite um numero");
+				System.out.println("**Erro**  Digite um numero");
+				leia.nextLine();
+				continue;
 			}
         	
-        	
-        	if(produto == -1) {
+        	if(estoque.verificarProduto(produto) == false) {
+        		System.out.println("Elemento não identificado ");
         		continue;
         	}
         	
@@ -173,8 +173,14 @@ public class Menu {
             break;     
         default:
             System.out.println("Escolha inválida");
+            inputUsuario = 0;
     }
 		}while(inputUsuario > 0);
+		
+		System.out.println("************************************************************************");
+		System.out.println("                                                                        ");
+		System.out.println("AMAZONIA tudo com os melhores preços                                    ");
+		System.out.println("                                                                        ");
 	
 	}
 		

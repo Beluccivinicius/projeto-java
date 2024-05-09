@@ -40,6 +40,20 @@ public class Estoque{
 		
 		return null;
 	}
+	
+	public boolean verificarProduto(int num){
+		if(num < 0 || num > estoque.size()) {
+			return false;
+		}
+		
+		var temNoEstoque = estoque.get(num);
+		
+		if(temNoEstoque == null) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	private void listaDeProdutos() {
 		int i = 0;
